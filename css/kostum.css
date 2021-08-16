@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.bg-navsecond {
+    background-color: #1AA859 !important;
+}
+
+.judulCard {
+    text-transform: uppercase;
+}
+
+.garisKategori {
+    height: 2px;
+    background-color: #1AA859;
+}
+
+.loginSelamat {
+    line-height: 40px;
+}
+
+.jarakLogin {
+    padding-top: 100px !important;
+}
+
+.tombolLogin {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 14px;
+}

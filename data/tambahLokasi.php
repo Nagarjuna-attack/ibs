@@ -13,11 +13,12 @@
                     <form action="./proses/tambahLokasi.php" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Pilih Kategori</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <?php $kategori = allKategori() ?>
-                                <? foreach($kategori as $kat ): ?>
-                                    <option value="<?= $kat['id_kategori']; ?>"><?=$kat['nama_kategori'] ?></option>
-                                <? endforeach; ?>
+                            <select class="form-control" name="idKategori" id="exampleFormControlSelect1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
                             </select>
                         </div>
                         <div class="form-group">

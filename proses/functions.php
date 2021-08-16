@@ -119,7 +119,8 @@
 // =================================================================================================
     function tambahLokasi($data){
         global $conn;
-        $namaTempat = htmlspecialchars($data["namaTempat"]);
+        $idKategori = htmlspecialchars($data["idKategori"]);
+        $namaLokasi = htmlspecialchars($data["namaLokasi"]);
         $deskripsi = htmlspecialchars($data["deskripsi"]);
         $alamatLengkap = htmlspecialchars($data["alamatLengkap"]);
         $email = htmlspecialchars($data["email"]);
@@ -145,7 +146,7 @@
 
         $query = "INSERT INTO tbl_lokasi
                     VALUES
-                    (NULL, '', '$namaTempat','$deskripsi', '$alamatLengkap', '$email', '$nohp', '$website', '$latitude', '$longtitude', '$linkyoutube', '$gambarUtama', '$gambarGaleri')
+                    (NULL, '', '$namaLokasi','$deskripsi', '$alamatLengkap', '$email', '$nohp', '$website', '$latitude', '$longtitude', '$linkyoutube', '$gambarUtama', '$gambarGaleri')
                     ";
         mysqli_query($conn, $query);
 

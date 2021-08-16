@@ -14,11 +14,10 @@
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Pilih Kategori</label>
                             <select class="form-control" name="idKategori" id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                <?php foreach (allKategori() as $value): ?>
+                                    <p></p>
+                                <option value="<?=$value['id_kategori']?>"><?=$value['nama_kategori'] ?></option>    
+                                <?php endforeach ?>
                             </select>
                         </div>
                         <div class="form-group">

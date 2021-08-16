@@ -14,11 +14,7 @@
     <!-- Navbar-->
     <?php
         include 'theme/navbar.php';
-    ?>
-    <!-- endnavbar -->
-
-    <?php $data = query("SELECT * FROM tbl_kategori "); ?>
-    
+    ?> 
       
     
 
@@ -32,13 +28,13 @@
   
     <div class="container">
       <div class="row pt-5">
-      <?php foreach ($data as $value) : ?>
+      <?php foreach (allKategori() as $value) : ?>
         <div class="col-3 mb-3">
           <div class="card" style="width: 16rem">
             <div class="card-body">
-              <h5 class="card-title"><?= $value["nama_kategori"]; ?> (1)</h5>
+              <h5 class="card-title"><?= $value["nama_kategori"]; ?> </h5>
               <div class="row justify-content-center">
-                <button class="btn btn-success px-4 mr-2" data-toggle="modal" data-target="#exampleModalCenter">Edit</button>
+                <button class="btn btn-success px-4 mr-2" data-toggle="modal" data-target="#Modal<?=$value['id_kategori'] ?>">Edit</button>
                 <button class="btn btn-danger px-3" data-toggle="modal" data-target="#exampleModal">Hapus</button>
               </div>
             </div>
@@ -50,8 +46,9 @@
     <!-- end Kategori -->
 
     <!-- ModalEdit -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="Modal<?=$value['id_kategori'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
+
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalCenterTitle">Edit Kategori</h5>
@@ -60,7 +57,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="./proses/editKategori.php" method="post" enctype="multipart/form-data">
               <div class="form-group">
                 <label for="formGroupExampleInput">Nama kategori</label>
                 <input type="text" name="nama" class="form-control" id="formGroupExampleInput" placeholder="Example input" />

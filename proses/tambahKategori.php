@@ -12,7 +12,7 @@
             echo "
                 <script>
                     alert('data berhasil ditambahkan');
-                    document.location.href = '../kategori.php'
+                    document.location.href = '../kategori.php';
                 </script>
             ";
         }else{

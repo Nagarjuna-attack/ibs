@@ -18,9 +18,21 @@
         global $conn;
 
         $result = mysqli_query($conn,"SELECT * FROM tbl_kategori ORDER BY nama_kategori ASC");
-        $rows = mysqli_fetch_array($result);
+
+        $lemari = [];
+
+        while($rows = mysqli_fetch_assoc($result)){
+
+            $lemari[] = $rows;
+        }
+
+        return $lemari;
+
+
+
         return $rows;
     }
+
 
     function tambahKategori($data){
       global $conn;
@@ -40,6 +52,7 @@
 
       return mysqli_affected_rows($conn);
     }
+
     function uploadKategori(){
     $namaFile = $_FILES['gambarKategori']['name'];
     $ukuranFile = $_FILES['gambarKategori']['size'];
@@ -81,7 +94,7 @@
 
 
 
-    move_uploaded_file($tmpName, '../img/kategori/' . $namaFileBaru);
+    move_uploaded_file($tmpName, 'img/kategori/' . $namaFileBaru);
 
     return $namaFileBaru;
     }
@@ -129,16 +142,16 @@
         $latitude = htmlspecialchars($data["latitude"]);
         $longtitude = htmlspecialchars($data["longtitude"]);
         $linkyoutube = htmlspecialchars($data["linkyoutube"]);
-        $gambarUtama = htmlspecialchars($data["gambarUtama"]);
-        $gambarGaleri = htmlspecialchars($data["gambarGaleri"]);
+        $gambarUtama = $_FILES['gambarUtama'];
+        $gambarGaleri = $_FILES['gambarGaleri'];
 
 
         //upload gambar
-        $gambarUtama = uploadLokasiUtama();
+        $gambarUtama = uploadLokasiUtama($gambarUtama);
         if (!$gambarUtama){
             return false;
         }
-        $gambarGaleri = uploadLokasiGaleri();
+        $gambarGaleri = uploadLokasiGaleri($gambarGaleri);
         if (!$gambarGaleri){
             return false;
         }
@@ -146,17 +159,19 @@
 
         $query = "INSERT INTO tbl_lokasi
                     VALUES
-                    (NULL, '', '$namaLokasi','$deskripsi', '$alamatLengkap', '$email', '$nohp', '$website', '$latitude', '$longtitude', '$linkyoutube', '$gambarUtama', '$gambarGaleri')
+                    (NULL, '$idKategori', '$namaLokasi','$deskripsi', '$alamatLengkap', '$email', '$nohp', '$website', '$latitude', '$longtitude', '$linkyoutube', '$gambarUtama', '$gambarGaleri')
                     ";
         mysqli_query($conn, $query);
 
         return mysqli_affected_rows($conn);
     }
-    function uploadLokasiUtama(){
-        $namaFile = $_FILES['gambarUtama']['name'];
-        $ukuranFile = $_FILES['gambarUtama']['size'];
-        $error = $_FILES['gambarUtama']['error'];
-        $tmpName = $_FILES['gambarUtama']['tmp_name'];
+    function uploadLokasiUtama($gamUtama){
+
+
+        $namaFile = $gamUtama['name'];
+        $ukuranFile = $gamUtama['size'];
+        $error = $gamUtama['error'];
+        $tmpName = $gamUtama['tmp_name'];
     
         // cek apakah tidak ada gambar yg diupload
         if ($error === 4){
@@ -197,11 +212,12 @@
     
         return $namaFileBaru;
         }
-        function uploadLokasiGaleri(){
-            $namaFile = $_FILES['gambarGaleri']['name'];
-            $ukuranFile = $_FILES['gambarGaleri']['size'];
-            $error = $_FILES['gambarGaleri']['error'];
-            $tmpName = $_FILES['gambarGaleri']['tmp_name'];
+        function uploadLokasiGaleri($gamGaleri){
+
+            $namaFile   = $gamGaleri['name'];
+            $ukuranFile = $gamGaleri['size'];
+            $error      = $gamGaleri['error'];
+            $tmpName    = $gamGaleri['tmp_name'];
         
             // cek apakah tidak ada gambar yg diupload
             if ($error === 4){
